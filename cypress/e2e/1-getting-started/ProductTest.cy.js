@@ -1,5 +1,5 @@
 describe('Broccoli Test', () => {
-        //Navigate to https://rahulshettyacademy.com/seleniumPractise/#/
+    //Navigate to https://rahulshettyacademy.com/seleniumPractise/#/
     before(() => {
         cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/');
     });
@@ -14,11 +14,14 @@ describe('Broccoli Test', () => {
         cy.get(' .product .quantity').should('contain.value', 1);
 
         //Click on the + icon twice and assert count is 3
-        cy.get('.product .increment').click({ multiple: true }).click({ multiple: true });
+        cy.get('.product .increment').first().click();
+        cy.get('.product .increment').first().click();
         cy.get('input[class="quantity"]').should('have.value', '3');
 
         //Click "Add to cart button" and assert "Added" is visible on the button
-        cy.get('button').contains('ADD TO CART').click().should("contain.text", '✔ ADDED');
+
+        cy.get('button').contains('ADD TO CART').click();
+        cy.get('button[class="added"]').should("contain.text", 'ADDED');
 
         //Click on the cart icon in the top right corner
         cy.get('.cart .cart-icon').click();
@@ -44,7 +47,7 @@ describe('Broccoli Test', () => {
         cy.get('button').contains('Place Order').click();
 
         //Select country
-        cy.get('.wrapperTwo select').select('Armenia').should('have.value', 'Armenia');
+        cy.get('.wrapperTwo select').select('Armenia',).should('have.value', 'Armenia');
 
         //Agree to Terms and Conditions
         cy.get('.chkAgree').click();
